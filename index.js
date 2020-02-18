@@ -1,4 +1,4 @@
-const { Retailer, Extension, Result } =  require('./performance')
+const { Retailer, Extension, Result } =  require('./LaboPerformance')
 const fs = require('fs').promises
 
 const Argos = new Retailer("Argos", "https://www.argos.co.uk")

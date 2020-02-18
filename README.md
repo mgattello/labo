@@ -12,6 +12,7 @@ Puppeteer.metrics API: https://pptr.dev/#?product=Puppeteer&version=v2.1.1&show=
 ## Web API
 
 Labo uses Performance.timing: https://developer.mozilla.org/en-US/docs/Web/API/Performance/timing
+
 Attention Performane.timing is deprecated:
 
 > This feature is no longer recommended. Though some browsers might still support it, it may have already been removed from the relevant web standards[...]
