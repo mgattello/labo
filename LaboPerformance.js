@@ -1,5 +1,6 @@
 /**
- *
+ * Reatailer is the final output of the LaboPerformance Test.
+ * It contains all the information needed for the tester to run, as well as the final results of the tests.
  */
 class Retailer {
   constructor (name, homepage, extensionTests = {}) {
@@ -9,7 +10,7 @@ class Retailer {
   }
 
   /**
-   *
+   * Return the homepage from the Class
    */
   getRetailerHomepage () {
     return `${this.homepage}`
@@ -17,7 +18,8 @@ class Retailer {
 }
 
 /**
- *
+ * Extension is a class that contains the Broswer Parameters needed for Puppeteer to load the extension.
+ * It'll contain the result as an Array
  */
 class Extension {
   constructor (name) {
@@ -27,8 +29,8 @@ class Extension {
   }
 
   /**
-   *
-   * @param {*} extension
+   * getParam will dynamically return the path of the extension inside the Browser Parameter object
+   * @param {ExtensionName} extension
    */
   getParam (extension) {
     if (extension === 'none')  {
@@ -54,15 +56,22 @@ class Extension {
 const Puppeteer = require('puppeteer')
 
 /**
- *
- */
+ * Result is an empty array that will contain all Tests classes.
+ * Here is where most of the magic happens.
+*/
 class Result {
   tests = []
 
   /**
+   * getResult is an async function that will return the Puppeteer.metrics and the performance.timing promises.
+   * It runs the test and format the data in a more readable way and saved in an array.
    *
-   * @param {*} homepage
-   * @param {*} browserParam
+   * The 2 important variables are:
+   * - heapSize: is the CPU memory used to run the Browser in terms of MB
+   * - loadTime: is the time spent for the Broswer to load
+   *
+   * @param {wbsiteUsedInTheTest} homepage
+   * @param {browserParamUsedInTheTest} browserParam
    */
   async getResult (homepage, browserParam) {
     const browser = await Puppeteer.launch(browserParam)
@@ -80,7 +89,6 @@ class Result {
       throw new Error("Metrics and performanceTiming don't exist")
     }
     const resultTest = new Test (loadTime, heapSize)
-    console.log(resultTest)
     await browser.close()
     return resultTest
   }
