@@ -1,9 +1,9 @@
-const { Website, Extension, Result } =  require('./LaboPerformance')
+const { Website, Extension, TestBuilder } =  require('./LaboPerformance')
 const fs = require('fs').promises
 
 const Argos = new Website("Argos", "https://www.argos.co.uk")
 const Honey = new Extension("Honey")
-const HoneyResult = new Result([])
+const HoneyResult = new TestBuilder()
 
 async function getFinalResult (Extension, Website, ExtensionResult) {
   Extension.results = await ExtensionResult.repeatTests(3, Website.getRetailerHomepage(), Extension.getParam(Extension.name.toLowerCase())).catch(console.log)
