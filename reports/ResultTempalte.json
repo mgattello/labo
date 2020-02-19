@@ -1,0 +1,32 @@
+{
+  "name": "Argos",
+  "homepage": "https://www.argos.co.uk",
+  "extensionTests": {
+    "name": "Honey",
+    "param": {
+      "headless": false,
+      "args": [
+        "--disable-extensions-except=honey",
+        "--load-extension=honey"
+      ],
+      "devtools": true
+    },
+    "results": [
+      {
+        "timestamp": 1582039653025,
+        "loadTime": "3.25 s",
+        "heapSize": "28.27 MB"
+      },
+      {
+        "timestamp": 1582039657467,
+        "loadTime": "3.35 s",
+        "heapSize": "24.86 MB"
+      },
+      {
+        "timestamp": 1582039661934,
+        "loadTime": "3.32 s",
+        "heapSize": "25.71 MB"
+      }
+    ]
+  }
+}
