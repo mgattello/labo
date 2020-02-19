@@ -2,7 +2,7 @@
  * Reatailer is the final output of the LaboPerformance Test.
  * It contains all the information needed for the tester to run, as well as the final results of the tests.
  */
-class Retailer {
+class Website {
   constructor (name, homepage, extensionTests = {}) {
     this.name = name
     this.homepage = homepage
@@ -63,11 +63,10 @@ class Result {
   tests = []
 
   /**
-   * getResult is an async function that will return the Puppeteer.metrics and the performance.timing promises.
-   * It runs the test and format the data in a more readable way and saved in an array.
-   *
+   * getResult returns an Instance of Test (resultTest). Inside resultTest there are 2 important variables:
+   * It runs the test and format the data in a more readable way.
    * The 2 important variables are:
-   * - heapSize: is the CPU memory used to run the Browser in terms of MB
+   * - heapSize: is the runtime memory used in terms of MB to load the page
    * - loadTime: is the time spent for the Broswer to load
    *
    * @param {wbsiteUsedInTheTest} homepage
@@ -94,13 +93,14 @@ class Result {
   }
 
   /**
-   *
-   * @param {*} counter
-   * @param {*} homepage
-   * @param {*} browserParam
+   * repeatTests run the getResult as many time as the counter. Counter must be a number
+   * @param {counterNumber} counter
+   * @param {WebsiteToTest} homepage
+   * @param {ExtensionToTest} browserParam
    */
   async repeatTests (counter, homepage, browserParam) {
     let allTests = []
+    // TODO: will be a reduce
     for( let i = 0; i < counter; i++){
       await this.getResult(homepage, browserParam).then(res => {
         allTests.push(res)
@@ -112,14 +112,18 @@ class Result {
 }
 
 /**
+ * Tets is the class that contains all data converted and formatted.
  *
+ * Timestamp is the ID used to diversify the Tests.
+ * Loadtime is shown with 2 digit after the point
+ * Heapsize is converted from bytes in  megabytes
  */
 class Test {
   constructor (loadTime, heapSize) {
-    this.timestamp = new Date().getTime()
+    this.date = new Date().toLocaleString()
     this.loadTime = loadTime.toFixed(2) + ' s'
     this.heapSize = heapSize.toFixed(2) + ' MB'
   }
 }
 
-module.exports = { Retailer, Extension, Result, Test }
+module.exports = { Website, Extension, Result, Test }
