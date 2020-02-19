@@ -1,8 +1,13 @@
 /**
- * @Website is the final output of the LaboPerformance Test.
+ * Dependency
+ */
+const fs = require('fs').promises
+
+/**
+ * @Report is the final output of the LaboPerformance Test.
  * It contains all the information needed for the tester to run, as well as the final results of the tests.
  */
-class Website {
+class Report {
   constructor (name, homepage, extensionTests = {}) {
     this.name = name
     this.homepage = homepage
@@ -14,6 +19,10 @@ class Website {
    */
   getRetailerHomepage () {
     return `${this.homepage}`
+  }
+
+  getRetailerName () {
+    return `${this.name}`
   }
 }
 
@@ -128,4 +137,36 @@ class Test {
   }
 }
 
-module.exports = { Website, Extension, TestBuilder, Test }
+/**
+ *
+ * @param {ExtensionName} Extension
+ * @param {PageToBeTested} Report
+ * @param {ExtensionResult} ExtensionResult
+ */
+async function getFinalResult (Extension, Report, ExtensionResult) {
+  Extension.results = await ExtensionResult.repeatTests(3, Report.getRetailerHomepage(), Extension.getParam(Extension.name.toLowerCase())).catch(console.log)
+  Report.extensionTests = await Extension
+  const reportName = await Report.getRetailerName()
+  fs.writeFile(`reports/${reportName}.json`, JSON.stringify(await Report, null, 2))
+  return await Report
+}
+
+/**
+ *
+ * @param {*} ExtensionName
+ * @param {*} PagesToTest
+ *
+ * LaboPerformance('Pouch', WebsitesToTest)
+ * LaboPerformance('Honey', WebsitesToTest)
+ */
+async function LaboPerformance(ExtensionName, PagesToTest) {
+  const caseStudy = PagesToTest.forEach(async (page) => {
+    const report = new Report(page.name, page.website)
+    const extensionName = new Extension(ExtensionName)
+    const extensionResult = new TestBuilder()
+    getFinalResult(extensionName, report, extensionResult).then(console.log).catch(console.log)
+  })
+  return await caseStudy
+}
+
+module.exports = { LaboPerformance }
