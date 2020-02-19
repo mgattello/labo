@@ -1,5 +1,5 @@
 /**
- * Reatailer is the final output of the LaboPerformance Test.
+ * @Website is the final output of the LaboPerformance Test.
  * It contains all the information needed for the tester to run, as well as the final results of the tests.
  */
 class Website {
@@ -18,8 +18,8 @@ class Website {
 }
 
 /**
- * Extension is a class that contains the Broswer Parameters needed for Puppeteer to load the extension.
- * It'll contain the result as an Array
+ * @Extension is a class that contains the Broswer Parameters needed for Puppeteer to load the extension.
+ * It'll contain the results as an Array
  */
 class Extension {
   constructor (name) {
@@ -29,7 +29,8 @@ class Extension {
   }
 
   /**
-   * getParam will dynamically return the path of the extension inside the Browser Parameter object
+   * @getParam will dynamically return the path of the extension inside the Browser Parameter object
+   *
    * @param {ExtensionName} extension
    */
   getParam (extension) {
@@ -56,14 +57,14 @@ class Extension {
 const Puppeteer = require('puppeteer')
 
 /**
- * Result is an empty array that will contain all Tests classes.
+ * @TestBuilder is an empty array that will contain all Tests classes.
  * Here is where most of the magic happens.
 */
-class Result {
+class TestBuilder {
   tests = []
 
   /**
-   * getResult returns an Instance of Test (resultTest). Inside resultTest there are 2 important variables:
+   * @getResult returns an Instance of Test (resultTest). Inside resultTest there are 2 important variables:
    * It runs the test and format the data in a more readable way.
    * The 2 important variables are:
    * - heapSize: is the runtime memory used in terms of MB to load the page
@@ -93,7 +94,8 @@ class Result {
   }
 
   /**
-   * repeatTests run the getResult as many time as the counter. Counter must be a number
+   * @repeatTests run the getResult as many time as the counter. Counter must be a number
+   *
    * @param {counterNumber} counter
    * @param {WebsiteToTest} homepage
    * @param {ExtensionToTest} browserParam
@@ -112,7 +114,7 @@ class Result {
 }
 
 /**
- * Tets is the class that contains all data converted and formatted.
+ * @Test is the class that contains all data converted and formatted.
  *
  * Timestamp is the ID used to diversify the Tests.
  * Loadtime is shown with 2 digit after the point
@@ -126,4 +128,4 @@ class Test {
   }
 }
 
-module.exports = { Website, Extension, Result, Test }
+module.exports = { Website, Extension, TestBuilder, Test }
