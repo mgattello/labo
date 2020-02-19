@@ -26,6 +26,7 @@ clone the repo: `git clone git@github.com:mgattello/labo.git`
 run `npm install`
 
 Download the CRX of the extension to test and save it in a folder inside the Directory.
+
 *** Make sure to disable redirect events in the extension. Opening new pages, will affects the tests ***
 
 The output will be saved in the reports directory
