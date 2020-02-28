@@ -1,15 +1,26 @@
-const { Report, Extension, TestBuilder } =  require('./LaboPerformance')
-const fs = require('fs').promises
+const { LaboPerformance } =  require('./LaboPerformance')
 
-const Argos = new Report("Argos", "https://www.argos.co.uk")
-const Honey = new Extension("Honey")
-const HoneyResult = new TestBuilder()
+const WebsitesToTest = [{
+    'name': 'Argos',
+    'website': 'https://www.google.com'
+  },
+  {
+    'name': 'Myprotein',
+    'website': 'https://www.myprotein.com/'
+  },
+  {
+    'name': 'Adidas',
+    'website': 'https://www.adidas.co.uk/'
+  },
+  {
+    'name': 'Youtube',
+    'website': 'https://www.youtube.com/'
+  },
+  {
+    'name': 'GoogleImagesCats',
+    'website': 'https://www.google.com/search?q=cats&source=lnms&tbm=isch&sa=X&ved=2ahUKEwjmqfeUwfHnAhXdUBUIHaTrDmMQ_AUoAXoECBsQAw&biw=1440&bih=766'
+  }
+]
 
-async function getFinalResult (Extension, Report, ExtensionResult) {
-  Extension.results = await ExtensionResult.repeatTests(3, Report.getRetailerHomepage(), Extension.getParam(Extension.name.toLowerCase())).catch(console.log)
-  Report.extensionTests = await Extension
-  fs.writeFile('reports/test.json', JSON.stringify(await Report, null, 2))
-  return await Report
-}
+LaboPerformance('Pouch', WebsitesToTest)
 
-getFinalResult(Honey, Argos, HoneyResult).then(console.log).catch(console.log)
