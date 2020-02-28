@@ -169,4 +169,4 @@ async function LaboPerformance(ExtensionName, PagesToTest) {
   return await caseStudy
 }
 
-module.exports = { Report, Extension, TestBuilder, Test, LaboPerformance }
+module.exports = { LaboPerformance }
