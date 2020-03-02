@@ -4,9 +4,9 @@
 const fs = require('fs').promises
 
 /**
- * @Report is the final output of the LaboPerformance Test.
- * It contains all the information needed for the tester to run, as well as the final results of the tests.
- */
+  * @Report is the final output of the LaboPerformance Test.
+  * It contains all the information needed for the tester to run, as well as the final results of the tests.
+  */
 class Report {
   constructor (name, homepage, extensionTests = {}) {
     this.name = name
