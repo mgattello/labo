@@ -1,4 +1,4 @@
-# Labo v0.0.1
+# Labo v1.1.1
 
 Labo is a Browser Extensions Tester. LaboPerformance uses the Puppeteer.metrics API and the Web API to run its performance tests.
 
