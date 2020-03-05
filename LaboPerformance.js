@@ -143,12 +143,11 @@ class Test {
  * @param {ExtensionResult} ExtensionResult
  */
 async function getFinalResult (Extension, Report, ExtensionResult) {
-  const functionCounter = 0
   Extension.results = await ExtensionResult.repeatTests(3, Report.getRetailerHomepage(), Extension.getParam(Extension.name.toLowerCase())).catch(console.log)
   Report.extensionTests = await Extension
   const reportName = await Report.getRetailerName()
   fs.writeFile(`reports/${reportName + '_' +uuidv1()}.json`, JSON.stringify(await Report, null, 2))
-  return await Report && functionCounter ++
+  return await Report
 }
 
 /**
