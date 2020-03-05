@@ -1,7 +1,8 @@
 /**
- * Dependency
+ * Dependencies
  */
 const fs = require('fs').promises
+const {v1: uuidv1} = require('uuid')
 
 /**
   * @Report is the final output of the LaboPerformance Test.
@@ -45,8 +46,7 @@ class Extension {
   getParam (extension) {
     if (extension === 'none')  {
       const browserParam = {
-        headless: false,
-        devtools: true,
+        headless: false
       }
       return this.param = browserParam
     }
@@ -55,8 +55,7 @@ class Extension {
       args: [
         `--disable-extensions-except=${extension}`,
         `--load-extension=${extension}`
-      ],
-      devtools: true
+      ]
     }
     return this.param  = browserParam
   }
@@ -144,11 +143,12 @@ class Test {
  * @param {ExtensionResult} ExtensionResult
  */
 async function getFinalResult (Extension, Report, ExtensionResult) {
+  const functionCounter = 0
   Extension.results = await ExtensionResult.repeatTests(3, Report.getRetailerHomepage(), Extension.getParam(Extension.name.toLowerCase())).catch(console.log)
   Report.extensionTests = await Extension
   const reportName = await Report.getRetailerName()
-  fs.writeFile(`reports/${reportName}.json`, JSON.stringify(await Report, null, 2))
-  return await Report
+  fs.writeFile(`reports/${reportName + '_' +uuidv1()}.json`, JSON.stringify(await Report, null, 2))
+  return await Report && functionCounter ++
 }
 
 /**
