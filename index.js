@@ -23,4 +23,3 @@ const WebsitesToTest = [{
 ]
 
 LaboPerformance('Pouch', WebsitesToTest)
-
