@@ -1,4 +1,4 @@
-![image](labo.png)
+![image](./src/assets/labo.png)
 
 # Labo v1.1.1
 
